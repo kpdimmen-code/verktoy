@@ -1,0 +1,43 @@
+title = "gitleaks config – verktoy"
+
+# Start med gitleaks sine innebygde reglar (AWS-nøklar, generiske API-nøklar,
+# private nøklar osb.), og legg til nokre spesifikt for M365/Entra-skript.
+[extend]
+useDefault = true
+
+[[rules]]
+id = "azure-tenant-id"
+description = "Mogleg Azure/Entra tenant-ID hardkoda ved sida av nøkkelord som 'tenant'"
+regex = '''(?i)tenant[_-]?id["']?\s*[:=]\s*["']?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}["']?'''
+tags = ["azure", "tenant"]
+
+[[rules]]
+id = "onmicrosoft-domain"
+description = "Hardkoda *.onmicrosoft.com-domene"
+regex = '''[a-zA-Z0-9-]+\.onmicrosoft\.com'''
+tags = ["azure", "tenant"]
+
+[[rules]]
+id = "azure-client-secret"
+description = "Mogleg Entra-app client secret"
+regex = '''(?i)client[_-]?secret["']?\s*[:=]\s*["'][a-zA-Z0-9~._\-]{30,}["']'''
+tags = ["azure", "secret"]
+
+[[rules]]
+id = "connection-string-credential"
+description = "Connection string med innebygd passord/nøkkel"
+regex = '''(?i)(AccountKey|Password|Pwd)\s*=\s*[^;"'\s]{8,}'''
+tags = ["generic", "secret"]
+
+[[rules]]
+id = "cert-thumbprint-with-context"
+description = "Sertifikat-thumbprint saman med credential-kontekst (låg alvorsgrad, sjekk manuelt)"
+regex = '''(?i)thumbprint["']?\s*[:=]\s*["']?[0-9A-Fa-f]{40}["']?'''
+tags = ["azure", "cert"]
+
+# Malen skal kunne innehalde eksempelverdiar utan å trigge skanninga
+[allowlist]
+description = "Ignorer malmappa"
+paths = [
+  '''_mal-skript/.*''',
+]
