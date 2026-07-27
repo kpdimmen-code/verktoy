@@ -1,10 +1,6 @@
 # Enable-ASR-Audit.ps1
 
-Del av bloggserien **"Sikkerheitsstoffet i Business Premium"** (knutdimmen.no) – Del 3: Defender som handlingslag.
-
 ## ⚠️ DISCLAIMER
-
-Dette scriptet er generert med hjelp av KI, og deretter gjennomgått og retta manuelt (sjå Endringslogg nedst).
 
 - **Test i eit ikkje-produksjonsmiljø/test-tenant fyrst.** Dette scriptet **skriv faktisk til tenanten din** (oppretter og kan tildele ein Intune-policy) – ikkje kjør det ukritisk mot ein produksjonstenant.
 - **Les gjennom koden sjølv** og forstå kva han gjer før du køyrer han.
@@ -62,10 +58,5 @@ Stadfesting av at policyen er oppretta (med Id), status på tildelinga (eller va
 
 ## Endringslogg
 
-- **2026-07-27 (v2)**: Scriptet **deployar no faktisk** policyen til Intune (tidlegare versjon berre bygde eit lokalt oversyn og skreiv instruksjonar). Bytta frå dei individuelt namngitte, uverifiserte eigenskapane til den verifiserte CSP-baserte streng-eigenskapen `defenderAttackSurfaceReductionRules`. La til tildelingssteg (`-AssignToGroupId` / `-AssignToAllDevices`). Fjerna referansar til ei ikkje-eksisterande `asr-confidence.kql`-fil.
-- **2026-07-27 (v1)**: Retta GUID-til-namn-mappinga (8 av 16 reglar var feilkopla, éin manglande regel lagt til).
+- **Ingen Endring**
 
-## Relatert
-
-- Bloggpost: Del 3 – Defender som handlingslag
-- Sjå òg: `Get-ASRStatus.ps1`, `intune/asr-audit.json`
